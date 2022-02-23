@@ -2,12 +2,12 @@
 version: '3'
 services:
     laravel.test:
-        build:
-            context: ./docker/8.1
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.1/app
+#        build:
+#            context: ./docker/8.1
+#            dockerfile: Dockerfile
+#            args:
+#                WWWGROUP: '${WWWGROUP}'
+        image: 'docker2.vandar.ir/vandar/laravel-php81-neo4j:1.0.0'
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -24,6 +24,8 @@ services:
         depends_on:
             - mysql
             - redis
+            - neo4j
+            - phpmyadmin
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -56,7 +58,7 @@ services:
             retries: 3
             timeout: 5s
     neo4j:
-        image: neo4j:latest
+        image: 'neo4j:latest'
         ports:
             - '${FORWARD_NEO4J_WEB_PORT:-7474}:7474'
             - '${FORWARD_NEO4J_PORT:-7687}:7687'
