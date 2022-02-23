@@ -55,6 +55,17 @@ services:
             test: ["CMD", "redis-cli", "ping"]
             retries: 3
             timeout: 5s
+    neo4j:
+        image: neo4j:latest
+        ports:
+            - '${FORWARD_NEO4J_WEB_PORT:-7474}:7474'
+            - '${FORWARD_NEO4J_PORT:-7687}:7687'
+        environment:
+            NEO4J_AUTH: none
+        volumes:
+            - 'sail-neo4j:/data'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
@@ -62,4 +73,6 @@ volumes:
     sail-mysql:
         driver: local
     sail-redis:
+        driver: local
+    sail-neo4j:
         driver: local
