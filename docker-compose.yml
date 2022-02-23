@@ -44,7 +44,7 @@ services:
             retries: 3
             timeout: 5s
     redis:
-        image: 'redis:alpine'
+        image: 'redislabs/redisgraph:latest'
         ports:
             - '${FORWARD_REDIS_PORT:-6379}:6379'
         volumes:
