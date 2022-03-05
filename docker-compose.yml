@@ -1,0 +1,15 @@
+version: '3'
+services:
+    laravel.test:
+        build: .
+        image: 'benchmark-fpm'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '80:80'
+            - '81:81'
+        networks:
+            - sail
+networks:
+    sail:
+        driver: bridge
